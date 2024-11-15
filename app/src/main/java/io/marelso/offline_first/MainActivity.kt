@@ -10,37 +10,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import io.marelso.offline_first.navigation.AppNavigationGraph
 import io.marelso.offline_first.ui.theme.OfflinefirstTheme
 
 class MainActivity : ComponentActivity() {
+
+    private var navHostController: NavHostController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             OfflinefirstTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    navHostController = rememberNavController()
+                    navHostController?.let {
+                        AppNavigationGraph(navHostController = it)
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OfflinefirstTheme {
-        Greeting("Android")
     }
 }
