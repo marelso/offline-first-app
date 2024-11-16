@@ -52,8 +52,13 @@ android {
 dependencies {
 
     with(libs) {
-        implementation(io.insert.koin)
         implementation(androidx.navigation.compose)
+        implementation(io.insert.koin)
+
+        implementation(moshi.kotlin)
+        implementation(moshi.adapters)
+        implementation(converter.gson)
+        implementation(retrofit)
     }
 
     implementation(libs.androidx.core.ktx)
